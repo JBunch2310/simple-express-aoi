@@ -1,32 +1,58 @@
-const express = require ("express")
-const req = require("express/lib/request")
+const express = require("express");
+const req = require("express/lib/request");
 
-const app = express()
+const app = express();
 
-const cars =[
-{id: 1, make: 'Tesla', year: '2023', model: 'x'},
-{id: 2, make: 'mercedes', year: 2022, model: 'G-Wagon'},
-{id: 3, make: 'nissan', year: 2025, model: 'G-Wagon'},
-{id: 4, make: 'audi', year: 2008, model: 'G-Wagon'},
-{id: 5, make: 'gmc', year: 2009, model: 'G-Wagon'},
-]
+const cars = [
+  {
+    id: 1,
+    make: "Tesla",
+    model: "x",
+    year: 2023,
+  },
+  {
+    id: 2,
+    make: "mercedes",
+    model: "g-wagon",
+    year: 2021,
+  },
+  {
+    id: 3,
+    make: "nissan",
+    model: "rogue",
+    year: 2018,
+  },
+  {
+    id: 4,
+    make: "audi",
+    model: "whatever",
+    year: 2020,
+  },
+  {
+    id: 5,
+    make: "gmc",
+    model: "f150",
+    year: 2018,
+  },
+];
 
-//get all cars
-app.get('/', (request, response) => {
-    response.send(cars)
-})
+//this command gets all cars
+app.get("/", (request, response) => {
+  response.send(cars);
+});
 
-//get only my future audi
-app.get('/cars/:carsId', (request, response) => {
-    console.log('this is my request.params +++++', request.params)
+//this gets only my future Audi
+app.get("/car/:carId", (request, response) => {
+  console.log("this is my request.params ++++++++", request.params);
 
-    //extracting CarsId from request.params
-    const { carsId } = request.params
+  //extracting carId from request.params
+  const { carId } = request.params;
+  response.send(cars[carId].make);
+});
 
-    response.send(cars[carsId])
-})
-
+//we want our application to start "listening"
 app.listen(3000, () => {
-    console.log('API listening on port 3000!')
-})
-//changes
+  console.log("API Listening in on port 3000!");
+});
+
+//this is just a comment
